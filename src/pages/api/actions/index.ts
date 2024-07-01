@@ -1,38 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import "@solana/web3.js"
 import { ComputeBudgetProgram, Connection, PublicKey, Transaction, TransactionInstruction, clusterApiUrl } from '@solana/web3.js';
-import { createPostResponse } from '@solana/actions'
-
+import { createPostResponse, ACTIONS_CORS_HEADERS, ActionGetResponse, ActionPostRequest, ActionPostResponse } from '@solana/actions'
 
 
 const MEMO_PROGRAM_ID = "MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr"
-
-type ActionGetResponse = {
-  icon: string;
-  label: string;
-  description: string;
-  title: string;
-};
-
-type ActionPostResponse = {
-  /** base64 encoded serialized transaction */
-  transaction: string;
-  /** describes the nature of the transaction */
-  message?: string;
-}
-
-type ActionPostRequest = {
-  /** base58-encoded public key of an account that may sign the transaction */
-  account: string;
-}
-
-
-const ACTIONS_CORS_HEADERS = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET,POST,PUT,OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  "Content-Type": "application/json",
-};
 
 function handleGet(req: NextApiRequest, res: NextApiResponse) {
   try {
